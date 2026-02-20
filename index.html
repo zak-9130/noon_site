@@ -30,13 +30,13 @@
     overflow-x: hidden;
   }
 
-  /* ── HEADER ───────────────────────────────── */
+  /* ── HEADER ─────────────────────────────────────── */
   header {
     background: var(--taupe);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 56px 24px 44px;
+    padding: clamp(24px, 5vw, 56px) 16px clamp(20px, 4vw, 44px);
     position: relative;
     overflow: hidden;
   }
@@ -46,115 +46,98 @@
     inset: 0;
     background: radial-gradient(ellipse at 50% 130%, rgba(91,29,16,0.3) 0%, transparent 65%);
   }
-  .logo-wrap { position: relative; text-align: center; animation: fadeDown 0.9s ease both; }
-  .logo-noon {
-    font-family: var(--font-display);
-    font-size: clamp(80px, 14vw, 160px);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--dark);
-    line-height: 0.85;
-    display: block;
+  .logo-wrap {
+    position: relative;
+    text-align: center;
+    animation: fadeDown 0.9s ease both;
   }
-  .logo-kafe {
-    font-family: var(--font-body);
-    font-size: clamp(11px, 1.5vw, 15px);
-    font-weight: 400;
-    letter-spacing: 0.55em;
-    color: var(--dark);
-    margin-top: 8px;
-    display: block;
-    text-transform: uppercase;
+  .logo-wrap img {
+    height: clamp(80px, 20vw, 250px); /* ✅ s'adapte au mobile */
+    width: auto;
+    max-width: 90vw;
+    object-fit: contain;
   }
 
-  /* ── PHOTO ÉQUIPE ─────────────────────────── */
+  /* ── PHOTO ÉQUIPE ────────────────────────────────── */
   .team-photo-section {
     background: var(--taupe);
-    padding: 0 0 64px;
+    padding: 0 0 clamp(32px, 6vw, 64px);
     display: flex;
     justify-content: center;
   }
   .team-photo-wrap {
-    width: min(960px, 88vw);
+    width: min(960px, 92vw);
     aspect-ratio: 16/7;
     border-radius: 3px;
     overflow: hidden;
     box-shadow: 0 24px 64px rgba(26,16,8,0.3);
-    position: relative;
   }
-  /* Image réelle */
+  /* Sur mobile, ratio moins large pour voir l'équipe */
+  @media (max-width: 600px) {
+    .team-photo-wrap { aspect-ratio: 4/3; }
+  }
   .team-photo-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  /* Placeholder si image absente */
-  .team-photo-wrap .img-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--bordeaux) 0%, #7a5040 50%, var(--creme) 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  .img-placeholder span { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
-  /* ── INTRO ────────────────────────────────── */
+  /* ── INTRO ───────────────────────────────────────── */
   .intro-section {
     background: var(--white);
-    padding: clamp(64px, 9vw, 112px) clamp(24px, 8vw, 120px);
+    padding: clamp(40px, 8vw, 112px) clamp(20px, 6vw, 120px);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px 80px;
+    gap: clamp(28px, 5vw, 56px) clamp(24px, 6vw, 80px);
     align-items: start;
     max-width: 1200px;
     margin: 0 auto;
   }
+  /* ✅ Mobile : colonne unique */
+  @media (max-width: 680px) {
+    .intro-section { grid-template-columns: 1fr; gap: 28px; }
+  }
   .intro-headline {
     grid-column: 1 / -1;
     font-family: var(--font-display);
-    font-size: clamp(34px, 5vw, 62px);
+    font-size: clamp(28px, 5vw, 62px);
     font-weight: 300;
     font-style: italic;
-    line-height: 1.15;
+    line-height: 1.2;
     color: var(--bordeaux);
   }
   .intro-headline em { font-style: normal; color: var(--bordeaux-deep); }
-  .intro-block p { font-size: clamp(13px, 1.3vw, 15px); line-height: 2; color: #3a2820; font-weight: 300; }
-  .intro-block p + p { margin-top: 18px; }
+  .intro-block p { font-size: clamp(13px, 1.5vw, 15px); line-height: 1.9; color: #3a2820; font-weight: 300; }
+  .intro-block p + p { margin-top: 16px; }
   .intro-accent-box {
     background: var(--creme);
     border-left: 3px solid var(--bordeaux);
-    padding: 28px 32px;
+    padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 32px);
     border-radius: 0 3px 3px 0;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
   }
   .intro-accent-box p {
     font-family: var(--font-display);
-    font-size: clamp(18px, 2.2vw, 26px);
+    font-size: clamp(16px, 2.2vw, 26px);
     font-style: italic;
     font-weight: 400;
     line-height: 1.5;
     color: var(--bordeaux-deep);
   }
-  @media (max-width: 680px) { .intro-section { grid-template-columns: 1fr; gap: 36px; } }
 
-  /* ── SLIDER PLATS ─────────────────────────── */
+  /* ── SLIDER PLATS ────────────────────────────────── */
   .plats-section {
     background: var(--dark);
-    padding: clamp(56px, 8vw, 88px) 0;
+    padding: clamp(40px, 7vw, 88px) 0;
     overflow: hidden;
   }
   .plats-header {
     text-align: center;
-    padding: 0 24px 44px;
+    padding: 0 20px clamp(28px, 5vw, 44px);
   }
   .plats-eyebrow {
     font-size: 10px;
@@ -166,21 +149,17 @@
   }
   .plats-title {
     font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 48px);
+    font-size: clamp(24px, 4vw, 48px);
     font-weight: 300;
     font-style: italic;
     color: var(--creme);
     line-height: 1.15;
   }
-
-  .slider-wrapper {
-    position: relative;
-    width: 100%;
-  }
+  .slider-wrapper { position: relative; width: 100%; }
   .slider-track {
     display: flex;
-    gap: 16px;
-    padding: 0 clamp(20px, 5vw, 60px);
+    gap: 12px;
+    padding: 0 clamp(16px, 5vw, 60px);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -189,14 +168,17 @@
   }
   .slider-track::-webkit-scrollbar { display: none; }
   .slider-track.grabbing { cursor: grabbing; }
-
   .plat-card {
-    flex: 0 0 clamp(240px, 30vw, 340px);
+    /* ✅ Sur mobile : 80vw pour voir qu'il y en a d'autres */
+    flex: 0 0 clamp(200px, 75vw, 340px);
     scroll-snap-align: start;
     border-radius: 3px;
     overflow: hidden;
     position: relative;
     background: var(--bordeaux-deep);
+  }
+  @media (min-width: 600px) {
+    .plat-card { flex: 0 0 clamp(220px, 35vw, 340px); }
   }
   .plat-card-img {
     width: 100%;
@@ -206,50 +188,30 @@
     transition: transform 0.5s ease;
   }
   .plat-card:hover .plat-card-img { transform: scale(1.04); }
-
-  /* Placeholder pour les photos de plats */
-  .plat-card-placeholder {
-    width: 100%;
-    aspect-ratio: 4/5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-  }
-  .plat-card-placeholder span { font-size: 36px; opacity: 0.3; }
-
   .plat-card-label {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(26,16,8,0.9) 0%, transparent 100%);
-    padding: 32px 18px 16px;
+    padding: 32px 16px 14px;
   }
   .plat-card-label p {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: clamp(15px, 2vw, 18px);
     font-style: italic;
     font-weight: 300;
     color: var(--creme);
     line-height: 1.2;
   }
-
-  /* Flèches navigation slider */
   .slider-nav {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-top: 32px;
-    padding: 0 24px;
+    margin-top: 28px;
+    padding: 0 20px;
   }
   .slider-btn {
-    width: 40px;
-    height: 40px;
+    width: 38px; height: 38px;
     border: 1px solid rgba(165,153,141,0.4);
     background: transparent;
     color: var(--taupe);
@@ -260,45 +222,44 @@
     justify-content: center;
     font-size: 16px;
     transition: background 0.3s, border-color 0.3s;
+    /* ✅ Zone de tap plus grande sur mobile */
+    min-width: 44px; min-height: 44px;
   }
   .slider-btn:hover { background: rgba(165,153,141,0.15); border-color: var(--taupe); }
-  .slider-dots {
-    display: flex;
-    gap: 8px;
-  }
+  .slider-dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 200px; }
   .slider-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: rgba(165,153,141,0.3);
     cursor: pointer;
     transition: background 0.3s;
-    border: none;
-    padding: 0;
+    border: none; padding: 0;
   }
   .slider-dot.active { background: var(--taupe); }
 
-  /* ── DIVIDER ──────────────────────────────── */
-  .section-divider { text-align: center; padding: 16px 24px 52px; }
-  .divider-row { display: flex; align-items: center; gap: 20px; max-width: 640px; margin: 0 auto; }
+  /* ── DIVIDER ─────────────────────────────────────── */
+  .section-divider { text-align: center; padding: 16px 20px 40px; }
+  .divider-row { display: flex; align-items: center; gap: 16px; max-width: 640px; margin: 0 auto; }
   .divider-row::before, .divider-row::after { content: ''; flex: 1; height: 1px; background: var(--taupe); opacity: 0.5; }
-  .divider-label { font-size: 10px; font-weight: 400; letter-spacing: 0.55em; text-transform: uppercase; color: var(--taupe); white-space: nowrap; }
+  .divider-label { font-size: 10px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--taupe); white-space: nowrap; }
 
-  /* ── TEAM GRID ────────────────────────────── */
-  .team-section { background: var(--white); padding: 0 clamp(16px, 4vw, 56px) 96px; }
+  /* ── TEAM GRID ───────────────────────────────────── */
+  .team-section { background: var(--white); padding: 0 clamp(12px, 3vw, 56px) clamp(48px, 8vw, 96px); }
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    /* ✅ 1 col mobile, 2 tablette, 3 desktop */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 3px;
     max-width: 1200px;
     margin: 0 auto;
+  }
+  @media (max-width: 560px) {
+    .team-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
   }
   .team-card { position: relative; overflow: hidden; transition: transform 0.4s ease; background: var(--white); }
   .team-card:hover { transform: translateY(-5px); }
   .team-card:hover .card-overlay { opacity: 1; }
   .team-card:hover .card-photo-el { filter: brightness(0.65); }
-
-  /* Image réelle du membre */
   .card-photo-el {
     width: 100%;
     aspect-ratio: 3/4;
@@ -306,7 +267,6 @@
     display: block;
     transition: filter 0.4s ease;
   }
-  /* Placeholder si pas d'image */
   .card-photo-placeholder {
     width: 100%;
     aspect-ratio: 3/4;
@@ -323,135 +283,155 @@
   .c4 { background: linear-gradient(150deg, #b09880 0%, #591D10 100%); }
   .c5 { background: linear-gradient(150deg, #6a5a4e 0%, #3a1a0e 100%); }
   .c6 { background: linear-gradient(150deg, #EBD6AD 0%, #A5998D 100%); }
-  .card-initial { font-family: var(--font-display); font-size: 110px; font-weight: 300; color: rgba(255,255,255,0.12); user-select: none; }
+  .card-initial { font-family: var(--font-display); font-size: clamp(60px, 10vw, 110px); font-weight: 300; color: rgba(255,255,255,0.12); user-select: none; }
   .c6 .card-initial { color: rgba(91,49,59,0.15); }
-  .card-ph-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: 0.3em; color: rgba(255,255,255,0.3); text-transform: uppercase; white-space: nowrap; }
+  .card-ph-hint { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 8px; letter-spacing: 0.25em; color: rgba(255,255,255,0.3); text-transform: uppercase; white-space: nowrap; }
   .c6 .card-ph-hint { color: rgba(91,49,59,0.3); }
-
+  /* ✅ Sur mobile, overlay toujours visible (pas de hover) */
   .card-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(89,29,16,0.92) 0%, transparent 55%);
     opacity: 0; transition: opacity 0.4s ease;
-    display: flex; align-items: flex-end; padding: 28px 24px;
+    display: flex; align-items: flex-end; padding: 20px 16px;
   }
-  .card-overlay-text { font-size: 13px; line-height: 1.75; color: var(--creme); font-weight: 300; }
-  .card-body { padding: 20px 22px 26px; background: var(--white); border-top: 2px solid var(--creme); }
-  .card-name { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--bordeaux-deep); display: block; margin-bottom: 2px; }
-  .card-role { font-size: 9px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--taupe); display: block; margin-bottom: 12px; }
-  .card-desc { font-size: 13px; line-height: 1.8; color: #5a3a2a; font-weight: 300; }
+  @media (hover: none) {
+    .card-overlay { opacity: 1; }
+  }
+  .card-overlay-text { font-size: clamp(11px, 1.5vw, 13px); line-height: 1.65; color: var(--creme); font-weight: 300; }
+  .card-body { padding: clamp(12px, 2vw, 20px) clamp(12px, 2vw, 22px) clamp(16px, 2.5vw, 26px); background: var(--white); border-top: 2px solid var(--creme); }
+  .card-name { font-family: var(--font-display); font-size: clamp(18px, 3vw, 24px); font-weight: 600; color: var(--bordeaux-deep); display: block; margin-bottom: 2px; }
+  .card-role { font-size: clamp(8px, 1.2vw, 9px); font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--taupe); display: block; margin-bottom: 10px; }
+  .card-desc { font-size: clamp(11px, 1.5vw, 13px); line-height: 1.8; color: #5a3a2a; font-weight: 300; }
 
-  /* ── TIRAGE AU SORT ───────────────────────── */
+  /* ── TIRAGE AU SORT ──────────────────────────────── */
   .contest-section {
     background: var(--bordeaux-deep);
-    padding: clamp(64px, 9vw, 104px) clamp(24px, 6vw, 80px);
+    padding: clamp(48px, 8vw, 104px) clamp(20px, 5vw, 80px);
     position: relative; overflow: hidden;
   }
   .contest-bg-text {
     position: absolute; font-family: var(--font-display);
-    font-size: clamp(160px, 28vw, 340px); font-weight: 600;
+    font-size: clamp(100px, 25vw, 340px); font-weight: 600;
     color: rgba(255,255,255,0.03); top: 50%; left: 50%;
     transform: translate(-50%, -50%); white-space: nowrap;
     pointer-events: none; letter-spacing: -0.05em; user-select: none;
   }
-  .contest-inner { max-width: 920px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 52px 80px; position: relative; z-index: 1; }
+  .contest-inner {
+    max-width: 920px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 5vw, 52px) clamp(24px, 6vw, 80px);
+    position: relative; z-index: 1;
+  }
+  /* ✅ Mobile : colonne unique */
+  @media (max-width: 680px) { .contest-inner { grid-template-columns: 1fr; gap: 32px; } }
   .contest-eyebrow { grid-column: 1/-1; font-size: 10px; letter-spacing: 0.55em; text-transform: uppercase; color: var(--taupe); margin-bottom: -16px; display: block; }
-  .contest-title { grid-column: 1/-1; font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px); font-weight: 300; font-style: italic; color: var(--creme); line-height: 1.1; }
-  .contest-block h3 { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--taupe); margin-bottom: 24px; }
+  .contest-title { grid-column: 1/-1; font-family: var(--font-display); font-size: clamp(26px, 5vw, 56px); font-weight: 300; font-style: italic; color: var(--creme); line-height: 1.1; }
+  .contest-block h3 { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--taupe); margin-bottom: 20px; }
   .prize-list { list-style: none; }
-  .prize-list li { display: flex; align-items: flex-start; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(165,153,141,0.18); color: var(--creme); font-size: 14px; font-weight: 300; line-height: 1.5; }
+  .prize-list li { display: flex; align-items: flex-start; gap: 16px; padding: 13px 0; border-bottom: 1px solid rgba(165,153,141,0.18); color: var(--creme); font-size: clamp(13px, 1.5vw, 14px); font-weight: 300; line-height: 1.5; }
   .prize-list li:first-child { border-top: 1px solid rgba(165,153,141,0.18); }
-  .prize-num { font-family: var(--font-display); font-size: 30px; font-style: italic; font-weight: 300; color: var(--taupe); min-width: 26px; line-height: 1; }
-  .how-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
-  .how-list li { display: flex; align-items: flex-start; gap: 18px; color: var(--creme); font-size: 14px; font-weight: 300; line-height: 1.6; }
+  .prize-num { font-family: var(--font-display); font-size: 28px; font-style: italic; font-weight: 300; color: var(--taupe); min-width: 24px; line-height: 1; }
+  .how-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .how-list li { display: flex; align-items: flex-start; gap: 16px; color: var(--creme); font-size: clamp(13px, 1.5vw, 14px); font-weight: 300; line-height: 1.6; }
   .how-num { width: 26px; height: 26px; border: 1px solid rgba(165,153,141,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--taupe); flex-shrink: 0; margin-top: 2px; }
-  .contest-cta { grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding-top: 12px; border-top: 1px solid rgba(165,153,141,0.2); }
-  .contest-cta p { font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--taupe); }
-  .btn { display: inline-block; padding: 13px 38px; font-family: var(--font-body); font-size: 10px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--creme); color: var(--creme); background: transparent; cursor: pointer; transition: background 0.3s, color 0.3s; border-radius: 1px; }
+  .contest-cta { grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 12px; border-top: 1px solid rgba(165,153,141,0.2); }
+  .contest-cta p { font-family: var(--font-display); font-style: italic; font-size: clamp(15px, 2vw, 17px); color: var(--taupe); }
+  .btn { display: inline-block; padding: 13px 32px; font-family: var(--font-body); font-size: 10px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--creme); color: var(--creme); background: transparent; cursor: pointer; transition: background 0.3s, color 0.3s; border-radius: 1px; }
   .btn:hover { background: var(--creme); color: var(--bordeaux-deep); }
-  @media (max-width: 680px) { .contest-inner { grid-template-columns: 1fr; gap: 40px; } }
 
-  /* ── FORMULAIRE ───────────────────────────── */
-  .form-section { background: var(--creme); padding: clamp(64px, 9vw, 104px) clamp(24px, 6vw, 80px); }
+  /* ── FORMULAIRE ──────────────────────────────────── */
+  .form-section { background: var(--creme); padding: clamp(48px, 8vw, 104px) clamp(20px, 5vw, 80px); }
   .form-inner { max-width: 760px; margin: 0 auto; }
   .form-eyebrow { font-size: 10px; letter-spacing: 0.55em; text-transform: uppercase; color: var(--bordeaux); margin-bottom: 12px; display: block; }
-  .form-title { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 300; font-style: italic; color: var(--bordeaux-deep); line-height: 1.15; margin-bottom: 14px; }
-  .form-subtitle { font-size: 14px; font-weight: 300; color: var(--bordeaux); line-height: 1.9; margin-bottom: 40px; max-width: 520px; }
-  .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 48px; margin-bottom: 44px; }
-  .perk-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 300; color: var(--bordeaux-deep); }
+  .form-title { font-family: var(--font-display); font-size: clamp(26px, 4.5vw, 52px); font-weight: 300; font-style: italic; color: var(--bordeaux-deep); line-height: 1.15; margin-bottom: 14px; }
+  .form-subtitle { font-size: clamp(13px, 1.5vw, 14px); font-weight: 300; color: var(--bordeaux); line-height: 1.9; margin-bottom: 32px; max-width: 520px; }
+  .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; margin-bottom: 36px; }
+  /* ✅ Mobile : 1 colonne */
+  @media (max-width: 480px) { .perks { grid-template-columns: 1fr; gap: 8px; } }
+  .perk-item { display: flex; align-items: center; gap: 10px; font-size: clamp(12px, 1.5vw, 13px); font-weight: 300; color: var(--bordeaux-deep); }
   .perk-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--bordeaux); flex-shrink: 0; }
-  @media (max-width: 520px) { .perks { grid-template-columns: 1fr; } }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  /* ✅ Mobile : 1 colonne */
+  @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
   .form-grid .full { grid-column: 1/-1; }
-  @media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
   .field { display: flex; flex-direction: column; gap: 6px; }
   .field label { font-size: 9px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--bordeaux); }
-  .field input { font-family: var(--font-body); font-size: 14px; font-weight: 300; padding: 14px 16px; background: rgba(255,255,255,0.55); border: 1px solid rgba(94,49,59,0.22); border-radius: 2px; color: var(--bordeaux-deep); outline: none; transition: border-color 0.2s, background 0.2s; letter-spacing: 0.02em; }
+  .field input {
+    font-family: var(--font-body); font-size: 14px; font-weight: 300;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(94,49,59,0.22);
+    border-radius: 2px; color: var(--bordeaux-deep); outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    /* ✅ Évite le zoom auto sur iOS */
+    font-size: max(16px, 14px);
+  }
   .field input::placeholder { color: rgba(94,49,59,0.38); }
   .field input:focus { border-color: var(--bordeaux); background: rgba(255,255,255,0.85); }
-  .form-footer { margin-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .form-footer {
+    margin-top: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  /* ✅ Mobile : bouton pleine largeur */
+  @media (max-width: 480px) {
+    .form-footer { flex-direction: column; align-items: stretch; }
+    .btn-submit { text-align: center; }
+  }
   .form-note { font-size: 12px; font-weight: 300; color: var(--bordeaux); opacity: 0.65; font-style: italic; }
-  .btn-submit { font-family: var(--font-body); font-size: 10px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; padding: 14px 40px; background: var(--bordeaux-deep); color: var(--creme); border: none; cursor: pointer; border-radius: 2px; transition: background 0.3s; }
+  .btn-submit {
+    font-family: var(--font-body); font-size: 10px; font-weight: 400;
+    letter-spacing: 0.45em; text-transform: uppercase;
+    padding: 14px 40px;
+    background: var(--bordeaux-deep); color: var(--creme);
+    border: none; cursor: pointer; border-radius: 2px;
+    transition: background 0.3s;
+  }
   .btn-submit:hover { background: var(--bordeaux); }
 
-  /* ── RÉSEAUX SOCIAUX ──────────────────────── */
-  .social-section { background: var(--taupe); padding: clamp(56px, 8vw, 88px) 24px; text-align: center; position: relative; overflow: hidden; }
-  .social-section::before { content: '☕'; position: absolute; font-size: 240px; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none; }
+  /* ── RÉSEAUX SOCIAUX ─────────────────────────────── */
+  .social-section { background: var(--taupe); padding: clamp(48px, 7vw, 88px) 20px; text-align: center; position: relative; overflow: hidden; }
+  .social-section::before { content: '☕'; position: absolute; font-size: clamp(120px, 30vw, 240px); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none; }
   .social-eyebrow { font-size: 10px; letter-spacing: 0.55em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; display: block; position: relative; }
-  .social-headline { font-family: var(--font-display); font-size: clamp(26px, 4vw, 44px); font-weight: 300; font-style: italic; color: var(--white); margin-bottom: 44px; line-height: 1.2; position: relative; }
-  .social-links { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
-  .social-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 10px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--white); padding: 12px 28px; border: 1px solid rgba(255,255,255,0.3); border-radius: 2px; transition: background 0.3s, border-color 0.3s; }
+  .social-headline { font-family: var(--font-display); font-size: clamp(22px, 4vw, 44px); font-weight: 300; font-style: italic; color: var(--white); margin-bottom: clamp(28px, 5vw, 44px); line-height: 1.2; position: relative; }
+  .social-links { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; }
+  /* ✅ Mobile : boutons sociaux pleine largeur */
+  @media (max-width: 480px) {
+    .social-links { flex-direction: column; align-items: stretch; max-width: 280px; margin: 0 auto; }
+  }
+  .social-link { display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 10px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--white); padding: 13px 24px; border: 1px solid rgba(255,255,255,0.3); border-radius: 2px; transition: background 0.3s, border-color 0.3s; }
   .social-link:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.65); }
   .social-link svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
 
-  /* ── FOOTER ───────────────────────────────── */
-  footer { background: var(--dark); padding: 36px 24px 28px; text-align: center; }
-  .foot-logo { font-family: var(--font-display); font-size: 36px; font-weight: 600; color: var(--taupe); letter-spacing: -0.02em; display: block; margin-bottom: 4px; }
-  .foot-sub { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--taupe); opacity: 0.45; display: block; margin-bottom: 18px; }
+  /* ── FOOTER ──────────────────────────────────────── */
+  footer { background: var(--dark); padding: clamp(24px, 4vw, 36px) 20px clamp(20px, 3vw, 28px); text-align: center; }
+  .foot-logo { font-family: var(--font-display); font-size: clamp(24px, 5vw, 36px); font-weight: 600; color: var(--taupe); letter-spacing: -0.02em; display: block; margin-bottom: 4px; }
+  .foot-sub { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--taupe); opacity: 0.45; display: block; margin-bottom: 16px; }
   footer p { font-size: 11px; color: rgba(165,153,141,0.35); letter-spacing: 0.04em; }
 
-  /* ── ANIMATIONS ───────────────────────────── */
+  /* ── ANIMATIONS ──────────────────────────────────── */
   @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- ══ LOGO ═══════════════════════════════════════ -->
+<!-- ══ LOGO ══════════════════════════════════════════ -->
 <header>
   <div class="logo-wrap">
-    <img src="images/logo_noon.png" alt="NOON Kafé" style="height: 250px;">
+    <img src="images/logo_noon.png" alt="NOON Kafé">
   </div>
 </header>
 
-
-
-<!-- ══ PHOTO ÉQUIPE ═══════════════════════════════ -->
-<!--
-  📁 STRUCTURE DE DOSSIERS ATTENDUE :
-  noon-site/
-  ├── noon-landing.html   ← ce fichier
-  └── images/
-       ├── equipe.jpg          ← photo d'équipe (bandeau)
-       ├── moha.jpg
-       ├── lou.jpg
-       ├── flavie.jpg
-       ├── salwa.jpg
-       ├── ali.jpg
-       ├── aaliyah.jpg
-       ├── plat-1.jpg          ← photos des plats pour le slider
-       ├── plat-2.jpg
-       ├── plat-3.jpg
-       ├── plat-4.jpg
-       └── plat-5.jpg
--->
+<!-- ══ PHOTO ÉQUIPE ══════════════════════════════════ -->
 <section class="team-photo-section">
   <div class="team-photo-wrap reveal">
     <img src="images/equipe.png" alt="L'équipe NOON">
   </div>
 </section>
 
-<!-- ══ INTRO ═══════════════════════════════════════ -->
+<!-- ══ INTRO ══════════════════════════════════════════ -->
 <section>
   <div class="intro-section">
     <h1 class="intro-headline reveal">
@@ -472,108 +452,51 @@
   </div>
 </section>
 
-<!-- ══ SLIDER PLATS ════════════════════════════════ -->
+<!-- ══ SLIDER PLATS ═══════════════════════════════════ -->
 <section class="plats-section">
   <div class="plats-header reveal">
     <span class="plats-eyebrow">La carte</span>
     <h2 class="plats-title">Ce qu'on mange<br>chez NOON</h2>
   </div>
-
   <div class="slider-wrapper">
     <div class="slider-track" id="sliderTrack">
-
-      <!-- Carte plat 1 -->      
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#2C1A0E)">-->
         <img src="images/plat_1.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>Cappucino latte</p>
-        </div>
+        <div class="plat-card-label"><p>Cappucino latte</p></div>
       </div>
-
-      <!-- Carte plat 2 -->
-
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#591D10,#3a1a0e)"></div>-->
-        <img src="images/plat_2.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>Harmonie Saumon Avocat</p>
-        </div>
+        <img src="images/plat_2.png" alt="Harmonie Saumon Avocat" class="plat-card-img">
+        <div class="plat-card-label"><p>Harmonie Saumon Avocat</p></div>
       </div>
-
-      <!-- Carte plat 3 -->
-
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#A5998D,#5E313B)">-->
-        <img src="images/plat_3.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>Éruption forestière</p>
-        </div>
+        <img src="images/plat_3.png" alt="Éruption forestière" class="plat-card-img">
+        <div class="plat-card-label"><p>Éruption forestière</p></div>
       </div>
-
-      <!-- Carte plat 4 -->
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#7a5040,#1A1008)">-->
-        <img src="images/plat_4.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>Le rêve Jasmin</p>
-        </div>
+        <img src="images/plat_4.png" alt="Le rêve Jasmin" class="plat-card-img">
+        <div class="plat-card-label"><p>Le rêve Jasmin</p></div>
       </div>
-
-      <!-- Carte plat 5 -->
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#EBD6AD,#A5998D)">-->
-        <img src="images/plat_5.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>L'alliance Soliès</p>
-        </div>
+        <img src="images/plat_5.png" alt="L'alliance Soliès" class="plat-card-img">
+        <div class="plat-card-label"><p>L'alliance Soliès</p></div>
       </div>
-
-      <!-- Carte plat 6 -->
-
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
-        <img src="images/plat_6.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>Hypnose Rolls</p>
-        </div>
+        <img src="images/plat_6.png" alt="Hypnose Rolls" class="plat-card-img">
+        <div class="plat-card-label"><p>Hypnose Rolls</p></div>
       </div>
-
-      <!-- Carte plat 7 -->
-       
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
-        <img src="images/plat_7.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>adami</p>
-        </div>
-      </div>  
-      
-      
-      <!-- Carte plat 8 -->
-       
-      <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
-        <img src="images/plat_8.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>La Kryptonite</p>
-        </div>
+        <img src="images/plat_7.png" alt="adami" class="plat-card-img">
+        <div class="plat-card-label"><p>adami</p></div>
       </div>
-
-
-      <!-- Carte plat 9 -->
-       
       <div class="plat-card">
-        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
-        <img src="images/plat_9.png" alt="Cappucino latte" class="plat-card-img">
-        <div class="plat-card-label">
-          <p>Avalanche Cookie</p>
-        </div>
+        <img src="images/plat_8.png" alt="La Kryptonite" class="plat-card-img">
+        <div class="plat-card-label"><p>La Kryptonite</p></div>
       </div>
-
+      <div class="plat-card">
+        <img src="images/plat_9.png" alt="Avalanche Cookie" class="plat-card-img">
+        <div class="plat-card-label"><p>Avalanche Cookie</p></div>
+      </div>
     </div>
-
-    <!-- Navigation -->
     <div class="slider-nav">
       <button class="slider-btn" id="prevBtn">&#8592;</button>
       <div class="slider-dots" id="sliderDots"></div>
@@ -582,20 +505,18 @@
   </div>
 </section>
 
-<!-- ══ DIVIDER ═════════════════════════════════════ -->
+<!-- ══ DIVIDER ════════════════════════════════════════ -->
 <div class="section-divider">
   <div class="divider-row">
     <span class="divider-label">L'équipe NOON</span>
   </div>
 </div>
 
-<!-- ══ TEAM ════════════════════════════════════════ -->
+<!-- ══ TEAM ══════════════════════════════════════════ -->
 <section class="team-section">
   <div class="team-grid">
 
-    <!-- MOHA -->
     <div class="team-card reveal">
-      <!-- Remplacez le placeholder par : <img src="images/moha.jpg" alt="Moha" class="card-photo-el"> -->
       <div class="card-photo-placeholder c1">
         <span class="card-initial">M</span>
         <span class="card-ph-hint">images/moha.jpg</span>
@@ -604,13 +525,11 @@
       <div class="card-body">
         <span class="card-name">Moha</span>
         <span class="card-role">Spécialiste matcha</span>
-        <p class="card-desc">Moha ne fait pas "du" matcha. Il fait LE matcha. Si ton matcha est bon, c'est lui. S'il est exceptionnel, c'est aussi lui <em>(il insiste)</em>.</p>
+        <p class="card-desc">Moha ne fait pas "du" matcha. Il fait LE matcha. S'il est exceptionnel, c'est aussi lui <em>(il insiste)</em>.</p>
       </div>
     </div>
 
-    <!-- LOU -->
     <div class="team-card reveal">
-      <!-- <img src="images/lou.jpg" alt="Lou" class="card-photo-el"> -->
       <div class="card-photo-placeholder c2">
         <span class="card-initial">L</span>
         <span class="card-ph-hint">images/lou.jpg</span>
@@ -619,13 +538,11 @@
       <div class="card-body">
         <span class="card-name">Lou</span>
         <span class="card-role">Spécialiste café</span>
-        <p class="card-desc">Lou peut reconnaître un café mal extrait avant même d'y goûter. Elle dit que le café est une science… mais elle accepte quand même de te faire un latte avec un cœur dedans.</p>
+        <p class="card-desc">Lou peut reconnaître un café mal extrait avant même d'y goûter. Elle dit que le café est une science… mais elle te fait quand même un latte avec un cœur dedans.</p>
       </div>
     </div>
 
-    <!-- FLAVIE -->
     <div class="team-card reveal">
-      <!-- <img src="images/flavie.jpg" alt="Flavie" class="card-photo-el"> -->
       <div class="card-photo-placeholder c3">
         <span class="card-initial">F</span>
         <span class="card-ph-hint">images/flavie.jpg</span>
@@ -634,13 +551,11 @@
       <div class="card-body">
         <span class="card-name">Flavie</span>
         <span class="card-role">Polyvalente officielle, sauveuse officieuse</span>
-        <p class="card-desc">Flavie a officiellement plusieurs rôles. Officieusement, elle gère tout ce qu'on n'avait pas prévu. Si quelque chose fonctionne bien chez NOON, il y a 80% de chances que ce soit grâce à elle.</p>
+        <p class="card-desc">Officieusement, elle gère tout ce qu'on n'avait pas prévu. Si quelque chose fonctionne bien chez NOON, il y a 80% de chances que ce soit grâce à elle.</p>
       </div>
     </div>
 
-    <!-- SALWA -->
     <div class="team-card reveal">
-      <!-- <img src="images/salwa.jpg" alt="Salwa" class="card-photo-el"> -->
       <div class="card-photo-placeholder c4">
         <span class="card-initial">S</span>
         <span class="card-ph-hint">images/salwa.jpg</span>
@@ -653,9 +568,7 @@
       </div>
     </div>
 
-    <!-- ALI -->
     <div class="team-card reveal">
-      <!-- <img src="images/ali.jpg" alt="Ali" class="card-photo-el"> -->
       <div class="card-photo-placeholder c5">
         <span class="card-initial">A</span>
         <span class="card-ph-hint">images/ali.jpg</span>
@@ -668,9 +581,7 @@
       </div>
     </div>
 
-    <!-- AALIYAH & COOKIE -->
     <div class="team-card reveal">
-      <!-- <img src="images/aaliyah.jpg" alt="Aaliyah & Cookie" class="card-photo-el"> -->
       <div class="card-photo-placeholder c6">
         <span class="card-initial" style="color:rgba(91,49,59,0.15)">A</span>
         <span class="card-ph-hint" style="color:rgba(91,49,59,0.3)">images/aaliyah.jpg</span>
@@ -679,14 +590,14 @@
       <div class="card-body">
         <span class="card-name">Aaliyah & Cookie</span>
         <span class="card-role">Direction générale</span>
-        <p class="card-desc">Aaliyah et Cookie supervisent l'ambiance. Responsables des sourires, du niveau de gourmandise et des pauses impro. Rien ne sort sans validation visuelle de leur part. Oui, même les cookies.</p>
+        <p class="card-desc">Responsables des sourires, du niveau de gourmandise et des pauses impro. Rien ne sort sans validation visuelle de leur part. Oui, même les cookies.</p>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ══ TIRAGE AU SORT ══════════════════════════════ -->
+<!-- ══ TIRAGE AU SORT ══════════════════════════════════ -->
 <section class="contest-section">
   <span class="contest-bg-text">NOON</span>
   <div class="contest-inner">
@@ -715,7 +626,7 @@
   </div>
 </section>
 
-<!-- ══ FORMULAIRE ══════════════════════════════════ -->
+<!-- ══ FORMULAIRE ══════════════════════════════════════ -->
 <section class="form-section" id="inscription">
   <div class="form-inner reveal">
     <span class="form-eyebrow">Avant ouverture</span>
@@ -727,7 +638,18 @@
       <div class="perk-item"><span class="perk-dot"></span><span>Menus en avant-première</span></div>
       <div class="perk-item"><span class="perk-dot"></span><span>Surprises réservées aux premiers</span></div>
     </div>
-    <form id="signup-form" onsubmit="handleSubmit(event)">
+
+    <!--
+    ══════════════════════════════════════════════
+    FORMSPREE — Pour recevoir les inscriptions par mail :
+    1. Va sur formspree.io et crée un compte avec ton mail pro
+    2. Crée un formulaire "Inscriptions NOON"
+    3. Remplace TONCODE ci-dessous par le code Formspree
+       ex: action="https://formspree.io/f/xbjwkzpa"
+    4. Supprime l'attribut onsubmit="handleSubmit(event)"
+    ══════════════════════════════════════════════
+    -->
+    <form id="signup-form" action="https://formspree.io/f/mnjbbbel" method="POST">
       <div class="form-grid">
         <div class="field">
           <label for="fname">Nom &amp; Prénom</label>
@@ -744,13 +666,13 @@
       </div>
       <div class="form-footer">
         <span class="form-note">Pas de spam. Juste quelques offres intéressantes.</span>
-        <button type="submit" class="btn-submit" id="submit-btn">S'inscrire</button>
+        <button type="submit" class="btn-submit">S'inscrire</button>
       </div>
     </form>
   </div>
 </section>
 
-<!-- ══ RÉSEAUX SOCIAUX ════════════════════════════ -->
+<!-- ══ RÉSEAUX SOCIAUX ═════════════════════════════════ -->
 <section class="social-section">
   <span class="social-eyebrow">Suivez l'aventure</span>
   <h2 class="social-headline">On se retrouve<br>sur les réseaux</h2>
@@ -770,7 +692,7 @@
   </div>
 </section>
 
-<!-- ══ FOOTER ══════════════════════════════════════ -->
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
 <footer>
   <span class="foot-logo">NOO&#780;N</span>
   <span class="foot-sub">K A F É</span>
@@ -778,7 +700,7 @@
 </footer>
 
 <script>
-  // ── Scroll reveal ──────────────────────────
+  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -789,17 +711,7 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Formulaire ─────────────────────────────
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = '✓ Inscrit(e) !';
-    btn.style.background = '#3a1a0e';
-    btn.disabled = true;
-    document.getElementById('signup-form').reset();
-  }
-
-  // ── Slider plats ───────────────────────────
+  // Slider
   const track    = document.getElementById('sliderTrack');
   const prevBtn  = document.getElementById('prevBtn');
   const nextBtn  = document.getElementById('nextBtn');
@@ -808,7 +720,6 @@
   const total    = cards.length;
   let current    = 0;
 
-  // Créer les dots
   cards.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
@@ -818,10 +729,9 @@
   });
 
   function getDots() { return dotsWrap.querySelectorAll('.slider-dot'); }
-
   function goTo(index) {
     current = Math.max(0, Math.min(index, total - 1));
-    const cardWidth = cards[0].offsetWidth + 16; // gap
+    const cardWidth = cards[0].offsetWidth + 12;
     track.scrollTo({ left: cardWidth * current, behavior: 'smooth' });
     getDots().forEach((d, i) => d.classList.toggle('active', i === current));
   }
@@ -829,7 +739,7 @@
   prevBtn.addEventListener('click', () => goTo(current - 1));
   nextBtn.addEventListener('click', () => goTo(current + 1));
 
-  // Drag to scroll
+  // Drag desktop
   let isDown = false, startX, scrollLeft;
   track.addEventListener('mousedown', e => { isDown = true; track.classList.add('grabbing'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
   track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('grabbing'); });
@@ -837,13 +747,12 @@
   track.addEventListener('mousemove', e => {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.5;
   });
 
   // Sync dots on scroll
   track.addEventListener('scroll', () => {
-    const cardWidth = cards[0].offsetWidth + 16;
+    const cardWidth = cards[0].offsetWidth + 12;
     const idx = Math.round(track.scrollLeft / cardWidth);
     if (idx !== current) { current = idx; getDots().forEach((d, i) => d.classList.toggle('active', i === current)); }
   });
