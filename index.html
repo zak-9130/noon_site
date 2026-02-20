@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOON — Kafé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --taupe:         #A5998D;
+    --bordeaux-deep: #591D10;
+    --bordeaux:      #5E313B;
+    --creme:         #EBD6AD;
+    --white:         #FAFAF8;
+    --dark:          #1A1008;
+    --font-display:  'Cormorant Garamond', serif;
+    --font-body:     'Josefin Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--dark);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ───────────────────────────────── */
+  header {
+    background: var(--taupe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 24px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 130%, rgba(91,29,16,0.3) 0%, transparent 65%);
+  }
+  .logo-wrap { position: relative; text-align: center; animation: fadeDown 0.9s ease both; }
+  .logo-noon {
+    font-family: var(--font-display);
+    font-size: clamp(80px, 14vw, 160px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    line-height: 0.85;
+    display: block;
+  }
+  .logo-kafe {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 1.5vw, 15px);
+    font-weight: 400;
+    letter-spacing: 0.55em;
+    color: var(--dark);
+    margin-top: 8px;
+    display: block;
+    text-transform: uppercase;
+  }
+
+  /* ── PHOTO ÉQUIPE ─────────────────────────── */
+  .team-photo-section {
+    background: var(--taupe);
+    padding: 0 0 64px;
+    display: flex;
+    justify-content: center;
+  }
+  .team-photo-wrap {
+    width: min(960px, 88vw);
+    aspect-ratio: 16/7;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(26,16,8,0.3);
+    position: relative;
+  }
+  /* Image réelle */
+  .team-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Placeholder si image absente */
+  .team-photo-wrap .img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bordeaux) 0%, #7a5040 50%, var(--creme) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .img-placeholder span { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  /* ── INTRO ────────────────────────────────── */
+  .intro-section {
+    background: var(--white);
+    padding: clamp(64px, 9vw, 112px) clamp(24px, 8vw, 120px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px 80px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .intro-headline {
+    grid-column: 1 / -1;
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5vw, 62px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.15;
+    color: var(--bordeaux);
+  }
+  .intro-headline em { font-style: normal; color: var(--bordeaux-deep); }
+  .intro-block p { font-size: clamp(13px, 1.3vw, 15px); line-height: 2; color: #3a2820; font-weight: 300; }
+  .intro-block p + p { margin-top: 18px; }
+  .intro-accent-box {
+    background: var(--creme);
+    border-left: 3px solid var(--bordeaux);
+    padding: 28px 32px;
+    border-radius: 0 3px 3px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+  .intro-accent-box p {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bordeaux-deep);
+  }
+  @media (max-width: 680px) { .intro-section { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* ── SLIDER PLATS ─────────────────────────── */
+  .plats-section {
+    background: var(--dark);
+    padding: clamp(56px, 8vw, 88px) 0;
+    overflow: hidden;
+  }
+  .plats-header {
+    text-align: center;
+    padding: 0 24px 44px;
+  }
+  .plats-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .plats-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--creme);
+    line-height: 1.15;
+  }
+
+  .slider-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .slider-track {
+    display: flex;
+    gap: 16px;
+    padding: 0 clamp(20px, 5vw, 60px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .slider-track::-webkit-scrollbar { display: none; }
+  .slider-track.grabbing { cursor: grabbing; }
+
+  .plat-card {
+    flex: 0 0 clamp(240px, 30vw, 340px);
+    scroll-snap-align: start;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    background: var(--bordeaux-deep);
+  }
+  .plat-card-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .plat-card:hover .plat-card-img { transform: scale(1.04); }
+
+  /* Placeholder pour les photos de plats */
+  .plat-card-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+  .plat-card-placeholder span { font-size: 36px; opacity: 0.3; }
+
+  .plat-card-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(26,16,8,0.9) 0%, transparent 100%);
+    padding: 32px 18px 16px;
+  }
+  .plat-card-label p {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--creme);
+    line-height: 1.2;
+  }
+
+  /* Flèches navigation slider */
+  .slider-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 0 24px;
+  }
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(165,153,141,0.4);
+    background: transparent;
+    color: var(--taupe);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .slider-btn:hover { background: rgba(165,153,141,0.15); border-color: var(--taupe); }
+  .slider-dots {
+    display: flex;
+    gap: 8px;
+  }
+  .slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(165,153,141,0.3);
+    cursor: pointer;
+    transition: background 0.3s;
+    border: none;
+    padding: 0;
+  }
+  .slider-dot.active { background: var(--taupe); }
+
+  /* ── DIVIDER ──────────────────────────────── */
+  .section-divider { text-align: center; padding: 16px 24px 52px; }
+  .divider-row { display: flex; align-items: center; gap: 20px; max-width: 640px; margin: 0 auto; }
+  .divider-row::before, .divider-row::after { content: ''; flex: 1; height: 1px; background: var(--taupe); opacity: 0.5; }
+  .divider-label { font-size: 10px; font-weight: 400; letter-spacing: 0.55em; text-transform: uppercase; color: var(--taupe); white-space: nowrap; }
+
+  /* ── TEAM GRID ────────────────────────────── */
+  .team-section { background: var(--white); padding: 0 clamp(16px, 4vw, 56px) 96px; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 3px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .team-card { position: relative; overflow: hidden; transition: transform 0.4s ease; background: var(--white); }
+  .team-card:hover { transform: translateY(-5px); }
+  .team-card:hover .card-overlay { opacity: 1; }
+  .team-card:hover .card-photo-el { filter: brightness(0.65); }
+
+  /* Image réelle du membre */
+  .card-photo-el {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.4s ease;
+  }
+  /* Placeholder si pas d'image */
+  .card-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: filter 0.4s ease;
+  }
+  .team-card:hover .card-photo-placeholder { filter: brightness(0.65); }
+  .c1 { background: linear-gradient(150deg, #A5998D 0%, #5E313B 100%); }
+  .c2 { background: linear-gradient(150deg, #C4A882 0%, #591D10 100%); }
+  .c3 { background: linear-gradient(150deg, #8a7a6e 0%, #5E313B 100%); }
+  .c4 { background: linear-gradient(150deg, #b09880 0%, #591D10 100%); }
+  .c5 { background: linear-gradient(150deg, #6a5a4e 0%, #3a1a0e 100%); }
+  .c6 { background: linear-gradient(150deg, #EBD6AD 0%, #A5998D 100%); }
+  .card-initial { font-family: var(--font-display); font-size: 110px; font-weight: 300; color: rgba(255,255,255,0.12); user-select: none; }
+  .c6 .card-initial { color: rgba(91,49,59,0.15); }
+  .card-ph-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: 0.3em; color: rgba(255,255,255,0.3); text-transform: uppercase; white-space: nowrap; }
+  .c6 .card-ph-hint { color: rgba(91,49,59,0.3); }
+
+  .card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(89,29,16,0.92) 0%, transparent 55%);
+    opacity: 0; transition: opacity 0.4s ease;
+    display: flex; align-items: flex-end; padding: 28px 24px;
+  }
+  .card-overlay-text { font-size: 13px; line-height: 1.75; color: var(--creme); font-weight: 300; }
+  .card-body { padding: 20px 22px 26px; background: var(--white); border-top: 2px solid var(--creme); }
+  .card-name { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--bordeaux-deep); display: block; margin-bottom: 2px; }
+  .card-role { font-size: 9px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--taupe); display: block; margin-bottom: 12px; }
+  .card-desc { font-size: 13px; line-height: 1.8; color: #5a3a2a; font-weight: 300; }
+
+  /* ── TIRAGE AU SORT ───────────────────────── */
+  .contest-section {
+    background: var(--bordeaux-deep);
+    padding: clamp(64px, 9vw, 104px) clamp(24px, 6vw, 80px);
+    position: relative; overflow: hidden;
+  }
+  .contest-bg-text {
+    position: absolute; font-family: var(--font-display);
+    font-size: clamp(160px, 28vw, 340px); font-weight: 600;
+    color: rgba(255,255,255,0.03); top: 50%; left: 50%;
+    transform: translate(-50%, -50%); white-space: nowrap;
+    pointer-events: none; letter-spacing: -0.05em; user-select: none;
+  }
+  .contest-inner { max-width: 920px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 52px 80px; position: relative; z-index: 1; }
+  .contest-eyebrow { grid-column: 1/-1; font-size: 10px; letter-spacing: 0.55em; text-transform: uppercase; color: var(--taupe); margin-bottom: -16px; display: block; }
+  .contest-title { grid-column: 1/-1; font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px); font-weight: 300; font-style: italic; color: var(--creme); line-height: 1.1; }
+  .contest-block h3 { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--taupe); margin-bottom: 24px; }
+  .prize-list { list-style: none; }
+  .prize-list li { display: flex; align-items: flex-start; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(165,153,141,0.18); color: var(--creme); font-size: 14px; font-weight: 300; line-height: 1.5; }
+  .prize-list li:first-child { border-top: 1px solid rgba(165,153,141,0.18); }
+  .prize-num { font-family: var(--font-display); font-size: 30px; font-style: italic; font-weight: 300; color: var(--taupe); min-width: 26px; line-height: 1; }
+  .how-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+  .how-list li { display: flex; align-items: flex-start; gap: 18px; color: var(--creme); font-size: 14px; font-weight: 300; line-height: 1.6; }
+  .how-num { width: 26px; height: 26px; border: 1px solid rgba(165,153,141,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--taupe); flex-shrink: 0; margin-top: 2px; }
+  .contest-cta { grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding-top: 12px; border-top: 1px solid rgba(165,153,141,0.2); }
+  .contest-cta p { font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--taupe); }
+  .btn { display: inline-block; padding: 13px 38px; font-family: var(--font-body); font-size: 10px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--creme); color: var(--creme); background: transparent; cursor: pointer; transition: background 0.3s, color 0.3s; border-radius: 1px; }
+  .btn:hover { background: var(--creme); color: var(--bordeaux-deep); }
+  @media (max-width: 680px) { .contest-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* ── FORMULAIRE ───────────────────────────── */
+  .form-section { background: var(--creme); padding: clamp(64px, 9vw, 104px) clamp(24px, 6vw, 80px); }
+  .form-inner { max-width: 760px; margin: 0 auto; }
+  .form-eyebrow { font-size: 10px; letter-spacing: 0.55em; text-transform: uppercase; color: var(--bordeaux); margin-bottom: 12px; display: block; }
+  .form-title { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 300; font-style: italic; color: var(--bordeaux-deep); line-height: 1.15; margin-bottom: 14px; }
+  .form-subtitle { font-size: 14px; font-weight: 300; color: var(--bordeaux); line-height: 1.9; margin-bottom: 40px; max-width: 520px; }
+  .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 48px; margin-bottom: 44px; }
+  .perk-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 300; color: var(--bordeaux-deep); }
+  .perk-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--bordeaux); flex-shrink: 0; }
+  @media (max-width: 520px) { .perks { grid-template-columns: 1fr; } }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-grid .full { grid-column: 1/-1; }
+  @media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 9px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--bordeaux); }
+  .field input { font-family: var(--font-body); font-size: 14px; font-weight: 300; padding: 14px 16px; background: rgba(255,255,255,0.55); border: 1px solid rgba(94,49,59,0.22); border-radius: 2px; color: var(--bordeaux-deep); outline: none; transition: border-color 0.2s, background 0.2s; letter-spacing: 0.02em; }
+  .field input::placeholder { color: rgba(94,49,59,0.38); }
+  .field input:focus { border-color: var(--bordeaux); background: rgba(255,255,255,0.85); }
+  .form-footer { margin-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .form-note { font-size: 12px; font-weight: 300; color: var(--bordeaux); opacity: 0.65; font-style: italic; }
+  .btn-submit { font-family: var(--font-body); font-size: 10px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; padding: 14px 40px; background: var(--bordeaux-deep); color: var(--creme); border: none; cursor: pointer; border-radius: 2px; transition: background 0.3s; }
+  .btn-submit:hover { background: var(--bordeaux); }
+
+  /* ── RÉSEAUX SOCIAUX ──────────────────────── */
+  .social-section { background: var(--taupe); padding: clamp(56px, 8vw, 88px) 24px; text-align: center; position: relative; overflow: hidden; }
+  .social-section::before { content: '☕'; position: absolute; font-size: 240px; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none; }
+  .social-eyebrow { font-size: 10px; letter-spacing: 0.55em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; display: block; position: relative; }
+  .social-headline { font-family: var(--font-display); font-size: clamp(26px, 4vw, 44px); font-weight: 300; font-style: italic; color: var(--white); margin-bottom: 44px; line-height: 1.2; position: relative; }
+  .social-links { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
+  .social-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 10px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--white); padding: 12px 28px; border: 1px solid rgba(255,255,255,0.3); border-radius: 2px; transition: background 0.3s, border-color 0.3s; }
+  .social-link:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.65); }
+  .social-link svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+
+  /* ── FOOTER ───────────────────────────────── */
+  footer { background: var(--dark); padding: 36px 24px 28px; text-align: center; }
+  .foot-logo { font-family: var(--font-display); font-size: 36px; font-weight: 600; color: var(--taupe); letter-spacing: -0.02em; display: block; margin-bottom: 4px; }
+  .foot-sub { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--taupe); opacity: 0.45; display: block; margin-bottom: 18px; }
+  footer p { font-size: 11px; color: rgba(165,153,141,0.35); letter-spacing: 0.04em; }
+
+  /* ── ANIMATIONS ───────────────────────────── */
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ══ LOGO ═══════════════════════════════════════ -->
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo_noon.png" alt="NOON Kafé" style="height: 250px;">
+  </div>
+</header>
+
+
+
+<!-- ══ PHOTO ÉQUIPE ═══════════════════════════════ -->
+<!--
+  📁 STRUCTURE DE DOSSIERS ATTENDUE :
+  noon-site/
+  ├── noon-landing.html   ← ce fichier
+  └── images/
+       ├── equipe.jpg          ← photo d'équipe (bandeau)
+       ├── moha.jpg
+       ├── lou.jpg
+       ├── flavie.jpg
+       ├── salwa.jpg
+       ├── ali.jpg
+       ├── aaliyah.jpg
+       ├── plat-1.jpg          ← photos des plats pour le slider
+       ├── plat-2.jpg
+       ├── plat-3.jpg
+       ├── plat-4.jpg
+       └── plat-5.jpg
+-->
+<section class="team-photo-section">
+  <div class="team-photo-wrap reveal">
+    <img src="images/equipe.png" alt="L'équipe NOON">
+  </div>
+</section>
+
+<!-- ══ INTRO ═══════════════════════════════════════ -->
+<section>
+  <div class="intro-section">
+    <h1 class="intro-headline reveal">
+      Bienvenue chez NOON…<br>
+      <em>ou plutôt chez nous.</em>
+    </h1>
+    <div class="intro-block reveal">
+      <p>Ici, pas juste un café : une équipe, des personnalités, des obsessions caféinées, des tests pâtissiers non-stop et beaucoup (trop) de discussions autour d'un latte.</p>
+      <p>Ici, on vient pour un café… mais on reste pour manger.</p>
+      <p>Du matin au brunch, du déjeuner au goûter, tout est pensé pour être partagé : bon café, cuisine salée, douceurs maison et une équipe qui fait tourner le lieu avec cœur.</p>
+    </div>
+    <div class="reveal">
+      <div class="intro-accent-box">
+        <p>Sur place ou à emporter.</p>
+        <p>Seul ou accompagné.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDER PLATS ════════════════════════════════ -->
+<section class="plats-section">
+  <div class="plats-header reveal">
+    <span class="plats-eyebrow">La carte</span>
+    <h2 class="plats-title">Ce qu'on mange<br>chez NOON</h2>
+  </div>
+
+  <div class="slider-wrapper">
+    <div class="slider-track" id="sliderTrack">
+
+      <!-- Carte plat 1 -->      
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#2C1A0E)">-->
+        <img src="images/plat_1.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>Cappucino latte</p>
+        </div>
+      </div>
+
+      <!-- Carte plat 2 -->
+
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#591D10,#3a1a0e)"></div>-->
+        <img src="images/plat_2.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>Harmonie Saumon Avocat</p>
+        </div>
+      </div>
+
+      <!-- Carte plat 3 -->
+
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#A5998D,#5E313B)">-->
+        <img src="images/plat_3.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>Éruption forestière</p>
+        </div>
+      </div>
+
+      <!-- Carte plat 4 -->
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#7a5040,#1A1008)">-->
+        <img src="images/plat_4.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>Le rêve Jasmin</p>
+        </div>
+      </div>
+
+      <!-- Carte plat 5 -->
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#EBD6AD,#A5998D)">-->
+        <img src="images/plat_5.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>L'alliance Soliès</p>
+        </div>
+      </div>
+
+      <!-- Carte plat 6 -->
+
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
+        <img src="images/plat_6.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>Hypnose Rolls</p>
+        </div>
+      </div>
+
+      <!-- Carte plat 7 -->
+       
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
+        <img src="images/plat_7.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>adami</p>
+        </div>
+      </div>  
+      
+      
+      <!-- Carte plat 8 -->
+       
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
+        <img src="images/plat_8.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>La Kryptonite</p>
+        </div>
+      </div>
+
+
+      <!-- Carte plat 9 -->
+       
+      <div class="plat-card">
+        <!--div class="plat-card-placeholder" style="background:linear-gradient(150deg,#5E313B,#591D10)">-->
+        <img src="images/plat_9.png" alt="Cappucino latte" class="plat-card-img">
+        <div class="plat-card-label">
+          <p>Avalanche Cookie</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="slider-nav">
+      <button class="slider-btn" id="prevBtn">&#8592;</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-btn" id="nextBtn">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DIVIDER ═════════════════════════════════════ -->
+<div class="section-divider">
+  <div class="divider-row">
+    <span class="divider-label">L'équipe NOON</span>
+  </div>
+</div>
+
+<!-- ══ TEAM ════════════════════════════════════════ -->
+<section class="team-section">
+  <div class="team-grid">
+
+    <!-- MOHA -->
+    <div class="team-card reveal">
+      <!-- Remplacez le placeholder par : <img src="images/moha.jpg" alt="Moha" class="card-photo-el"> -->
+      <div class="card-photo-placeholder c1">
+        <span class="card-initial">M</span>
+        <span class="card-ph-hint">images/moha.jpg</span>
+        <div class="card-overlay"><p class="card-overlay-text">Température précise, mousse parfaite, regard concentré… Si ton matcha est bon, c'est lui.</p></div>
+      </div>
+      <div class="card-body">
+        <span class="card-name">Moha</span>
+        <span class="card-role">Spécialiste matcha</span>
+        <p class="card-desc">Moha ne fait pas "du" matcha. Il fait LE matcha. Si ton matcha est bon, c'est lui. S'il est exceptionnel, c'est aussi lui <em>(il insiste)</em>.</p>
+      </div>
+    </div>
+
+    <!-- LOU -->
+    <div class="team-card reveal">
+      <!-- <img src="images/lou.jpg" alt="Lou" class="card-photo-el"> -->
+      <div class="card-photo-placeholder c2">
+        <span class="card-initial">L</span>
+        <span class="card-ph-hint">images/lou.jpg</span>
+        <div class="card-overlay"><p class="card-overlay-text">Elle peut reconnaître un café mal extrait avant même d'y goûter.</p></div>
+      </div>
+      <div class="card-body">
+        <span class="card-name">Lou</span>
+        <span class="card-role">Spécialiste café</span>
+        <p class="card-desc">Lou peut reconnaître un café mal extrait avant même d'y goûter. Elle dit que le café est une science… mais elle accepte quand même de te faire un latte avec un cœur dedans.</p>
+      </div>
+    </div>
+
+    <!-- FLAVIE -->
+    <div class="team-card reveal">
+      <!-- <img src="images/flavie.jpg" alt="Flavie" class="card-photo-el"> -->
+      <div class="card-photo-placeholder c3">
+        <span class="card-initial">F</span>
+        <span class="card-ph-hint">images/flavie.jpg</span>
+        <div class="card-overlay"><p class="card-overlay-text">Si quelque chose fonctionne bien chez NOON, il y a 80% de chances que ce soit grâce à elle.</p></div>
+      </div>
+      <div class="card-body">
+        <span class="card-name">Flavie</span>
+        <span class="card-role">Polyvalente officielle, sauveuse officieuse</span>
+        <p class="card-desc">Flavie a officiellement plusieurs rôles. Officieusement, elle gère tout ce qu'on n'avait pas prévu. Si quelque chose fonctionne bien chez NOON, il y a 80% de chances que ce soit grâce à elle.</p>
+      </div>
+    </div>
+
+    <!-- SALWA -->
+    <div class="team-card reveal">
+      <!-- <img src="images/salwa.jpg" alt="Salwa" class="card-photo-el"> -->
+      <div class="card-photo-placeholder c4">
+        <span class="card-initial">S</span>
+        <span class="card-ph-hint">images/salwa.jpg</span>
+        <div class="card-overlay"><p class="card-overlay-text">Recettes maison, tests en continu et desserts qui disparaissent trop vite.</p></div>
+      </div>
+      <div class="card-body">
+        <span class="card-name">Salwa</span>
+        <span class="card-role">Pâtissière</span>
+        <p class="card-desc">Salwa s'occupe de la douceur du lieu. Recettes maison, tests en continu et desserts qui disparaissent trop vite. <em>(On a une idée sur qui les fait disparaître.)</em></p>
+      </div>
+    </div>
+
+    <!-- ALI -->
+    <div class="team-card reveal">
+      <!-- <img src="images/ali.jpg" alt="Ali" class="card-photo-el"> -->
+      <div class="card-photo-placeholder c5">
+        <span class="card-initial">A</span>
+        <span class="card-ph-hint">images/ali.jpg</span>
+        <div class="card-overlay"><p class="card-overlay-text">Toujours une idée, toujours une poêle chaude.</p></div>
+      </div>
+      <div class="card-body">
+        <span class="card-name">Ali</span>
+        <span class="card-role">Cuisto</span>
+        <p class="card-desc">Ali cuisine comme s'il recevait chez lui. Toujours une idée, toujours une poêle chaude, toujours quelqu'un à qui dire : <em>"attends goûte ça vite"</em>.</p>
+      </div>
+    </div>
+
+    <!-- AALIYAH & COOKIE -->
+    <div class="team-card reveal">
+      <!-- <img src="images/aaliyah.jpg" alt="Aaliyah & Cookie" class="card-photo-el"> -->
+      <div class="card-photo-placeholder c6">
+        <span class="card-initial" style="color:rgba(91,49,59,0.15)">A</span>
+        <span class="card-ph-hint" style="color:rgba(91,49,59,0.3)">images/aaliyah.jpg</span>
+        <div class="card-overlay"><p class="card-overlay-text">Rien ne sort sans validation visuelle de leur part. Oui, même les cookies.</p></div>
+      </div>
+      <div class="card-body">
+        <span class="card-name">Aaliyah & Cookie</span>
+        <span class="card-role">Direction générale</span>
+        <p class="card-desc">Aaliyah et Cookie supervisent l'ambiance. Responsables des sourires, du niveau de gourmandise et des pauses impro. Rien ne sort sans validation visuelle de leur part. Oui, même les cookies.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ TIRAGE AU SORT ══════════════════════════════ -->
+<section class="contest-section">
+  <span class="contest-bg-text">NOON</span>
+  <div class="contest-inner">
+    <span class="contest-eyebrow">Jeu concours</span>
+    <h2 class="contest-title reveal">Tirage au sort<br>ouverture NOON</h2>
+    <div class="contest-block reveal">
+      <h3>À gagner — 3 gagnants</h3>
+      <ul class="prize-list">
+        <li><span class="prize-num">1</span><span>Brunch pour 2</span></li>
+        <li><span class="prize-num">2</span><span>Formule lunch offerte pour 2</span></li>
+        <li><span class="prize-num">3</span><span>Box pâtisseries maison</span></li>
+      </ul>
+    </div>
+    <div class="contest-block reveal">
+      <h3>Pour participer</h3>
+      <ul class="how-list">
+        <li><span class="how-num">1</span><span>Laisse ton mail dans le formulaire ci-dessous</span></li>
+        <li><span class="how-num">2</span><span>Suis-nous sur Instagram</span></li>
+        <li><span class="how-num">3</span><span>Viens à l'ouverture si tu peux ☕</span></li>
+      </ul>
+    </div>
+    <div class="contest-cta reveal">
+      <p>Tirage effectué le jour J.</p>
+      <a href="#inscription" class="btn">Je participe</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FORMULAIRE ══════════════════════════════════ -->
+<section class="form-section" id="inscription">
+  <div class="form-inner reveal">
+    <span class="form-eyebrow">Avant ouverture</span>
+    <h2 class="form-title">Deviens un des premiers<br>de NOON</h2>
+    <p class="form-subtitle">Inscris-toi pour recevoir tes avantages exclusifs, réservés aux habitués du tout début.</p>
+    <div class="perks">
+      <div class="perk-item"><span class="perk-dot"></span><span>Invitations avant ouverture</span></div>
+      <div class="perk-item"><span class="perk-dot"></span><span>Offres exclusives lancement</span></div>
+      <div class="perk-item"><span class="perk-dot"></span><span>Menus en avant-première</span></div>
+      <div class="perk-item"><span class="perk-dot"></span><span>Surprises réservées aux premiers</span></div>
+    </div>
+    <form id="signup-form" onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div class="field">
+          <label for="fname">Nom &amp; Prénom</label>
+          <input type="text" id="fname" name="nom" placeholder="Prénom Nom" required>
+        </div>
+        <div class="field">
+          <label for="tel">Téléphone</label>
+          <input type="tel" id="tel" name="tel" placeholder="+33 6 00 00 00 00">
+        </div>
+        <div class="field full">
+          <label for="email">Adresse mail</label>
+          <input type="email" id="email" name="email" placeholder="ton@mail.fr" required>
+        </div>
+      </div>
+      <div class="form-footer">
+        <span class="form-note">Pas de spam. Juste quelques offres intéressantes.</span>
+        <button type="submit" class="btn-submit" id="submit-btn">S'inscrire</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══ RÉSEAUX SOCIAUX ════════════════════════════ -->
+<section class="social-section">
+  <span class="social-eyebrow">Suivez l'aventure</span>
+  <h2 class="social-headline">On se retrouve<br>sur les réseaux</h2>
+  <div class="social-links">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-link">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/" target="_blank" rel="noopener" class="social-link">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
+      TikTok
+    </a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social-link">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════ -->
+<footer>
+  <span class="foot-logo">NOO&#780;N</span>
+  <span class="foot-sub">K A F É</span>
+  <p>© 2026 NOON Kafé — Bientôt chez vous.</p>
+</footer>
+
+<script>
+  // ── Scroll reveal ──────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Formulaire ─────────────────────────────
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = '✓ Inscrit(e) !';
+    btn.style.background = '#3a1a0e';
+    btn.disabled = true;
+    document.getElementById('signup-form').reset();
+  }
+
+  // ── Slider plats ───────────────────────────
+  const track    = document.getElementById('sliderTrack');
+  const prevBtn  = document.getElementById('prevBtn');
+  const nextBtn  = document.getElementById('nextBtn');
+  const dotsWrap = document.getElementById('sliderDots');
+  const cards    = track.querySelectorAll('.plat-card');
+  const total    = cards.length;
+  let current    = 0;
+
+  // Créer les dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Plat ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  function getDots() { return dotsWrap.querySelectorAll('.slider-dot'); }
+
+  function goTo(index) {
+    current = Math.max(0, Math.min(index, total - 1));
+    const cardWidth = cards[0].offsetWidth + 16; // gap
+    track.scrollTo({ left: cardWidth * current, behavior: 'smooth' });
+    getDots().forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // Drag to scroll
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => { isDown = true; track.classList.add('grabbing'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('grabbing'); });
+  track.addEventListener('mouseup',   () => { isDown = false; track.classList.remove('grabbing'); });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+
+  // Sync dots on scroll
+  track.addEventListener('scroll', () => {
+    const cardWidth = cards[0].offsetWidth + 16;
+    const idx = Math.round(track.scrollLeft / cardWidth);
+    if (idx !== current) { current = idx; getDots().forEach((d, i) => d.classList.toggle('active', i === current)); }
+  });
+</script>
+</body>
+</html>
